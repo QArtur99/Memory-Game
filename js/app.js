@@ -88,15 +88,15 @@ function shuffle(array) {
 //onCardClick
 function onCardClick(event) {
   event.preventDefault();
-  if (cardCanShow) {
+  if (cardCanShow && event.target.className === "card") {
     if (moveCounter === 0) {
       counterIntervalId = setInterval(startTimer, 1000);
     }
 
     moveCounter++;
     if (moveCounter % 2 !== 0) {
-      lastCard = event.target;
-      lastCard.className = "card open show";
+        lastCard = event.target;
+        lastCard.className = "card open show";
     } else {
       document.querySelector('.moves').textContent = moveCounter / 2;
       if (lastCard.querySelector('i').className === event.target.querySelector('i').className) {
@@ -119,7 +119,7 @@ function onCardClick(event) {
         event.target.className = "card mismatch";
 
         mismatchCounter++;
-        if (starsList.length > 0 && mismatchCounter / 5 >= 1) {
+        if (starsList.length > 1 && mismatchCounter / 5 >= 1) {
           mismatchCounter = mismatchCounter / 5;
           starsList[0].remove();
           if (starsList.length === 0) {
